@@ -112,19 +112,13 @@ public class Game
         System.out.println(currentRoom.getLongDescription());
         
     }
-
-    private void printLocationInfo() {
-        System.out.println(currentRoom.getLongDescription());
-    }
     /**
      * Given a command, process (that is: execute) the command.
      * @param command The command to be processed.
      * @return true If the command ends the game, false otherwise.
      */
-    private String processCommand(Command command) 
-    {
+    private String processCommand(Command command) {
         boolean wantToQuit = false;
-
         if(command.isUnknown()) {
             return "I don't know what you mean...";       
         }
@@ -142,6 +136,7 @@ public class Game
 
         return result ;
     }
+
 
     // implementations of user commands:
 
