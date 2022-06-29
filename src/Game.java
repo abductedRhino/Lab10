@@ -42,26 +42,26 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room start, enclosure, den, cave, pit;
 
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
+        start = new Room("outside the jungle");
+        enclosure = new Room("in an empty rhino enclosure");
+        den = new Room("in a poachers den");
+        cave = new Room("in a cave");
+        pit = new Room("in a pit of snakes");
 
         // initialise room exits
-        outside.setExit("east", theater);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
-        theater.setExit("west", outside);
-        pub.setExit("east", outside);
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
-        office.setExit("west", lab);
+        start.setExit("east", enclosure);
+        start.setExit("south", cave);
+        start.setExit("west", den);
+        enclosure.setExit("west", start);
+        den.setExit("east", start);
+        cave.setExit("north", start);
+        cave.setExit("east", pit);
+        pit.setExit("west", cave);
 
-        currentRoom = outside;  // start game outside
+        currentRoom = start;  // start game outside
     }
 
     /**
@@ -212,9 +212,9 @@ public class Game
      return currentRoom.getLongDescription();
   }
   private String eat(){
-      return new String("You have eaten now and are not hungry any more");
+      return new String ("You have eaten now and are not hungry any more");  
   }
   private String jump(){
-      return new String("You jumped and almost broke your ankle...");
+      return new String ("You jumped and almost broke your ankle...");
   }
 }
