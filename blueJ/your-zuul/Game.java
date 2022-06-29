@@ -133,6 +133,15 @@ public class Game
         else if (commandWord.equals("quit")) {
             result = quit(command);
         }
+        else if (commandWord.equals("look")){
+            result = look();
+        }
+        else if (commandWord.equals("eat")){
+            result = eat();
+        }
+        else if (commandWord.equals("jump")){
+            result = jump();
+        }
 
         return result ;
     }
@@ -198,4 +207,14 @@ public class Game
             return null;  // signal that we want to quit
         }
     }
+     private String look()
+  {
+     return currentRoom.getLongDescription();
+  }
+  private String eat(){
+      return "You have eaten now and are not hungry any more";  
+  }
+  private String jump(){
+      return "You jumped and almost broke your ankle...";
+  }
 }

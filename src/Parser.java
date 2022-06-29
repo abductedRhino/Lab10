@@ -26,7 +26,7 @@ public class Parser
      */
     public Parser() 
     {
-        commands = new CommandWords(new String[]{"go", "quit", "help"});
+        commands = new CommandWords(new String[]{"go", "quit", "help", "look", "eat", "jump"});
         reader = new Scanner(System.in);
     }
 
