@@ -212,9 +212,9 @@ public class Game
      return currentRoom.getLongDescription();
   }
   private String eat(){
-      return "You have eaten now and are not hungry any more";  
+      return new String("You have eaten now and are not hungry any more");  
   }
   private String jump(){
-      return "You jumped and almost broke your ankle...";
+      return new String ("You jumped and almost broke your ankle...");
   }
 }
