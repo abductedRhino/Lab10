@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * This class is part of the "World of Zuul" application. 
@@ -15,13 +15,21 @@ import java.util.Arrays;
 public class CommandWords
 {
     // a constant array that holds all valid command words
-    private String[] validCommands;
+    private HashMap<String, CommandWord> validCommands;
 
     /**
      * Constructor - initialise the command words.
      */
-    public CommandWords(String[] validCommands) {
-        this.validCommands = validCommands;
+    public CommandWords() {
+        validCommands = new HashMap<>();
+        validCommands.put("go",CommandWord.GO);
+        validCommands.put("look",CommandWord.LOOK);
+        validCommands.put("eat",CommandWord.EAT);
+        validCommands.put("help",CommandWord.HELP);
+        //validCommands.put("?",CommandWord.UNKNOWN);
+        validCommands.put("quit",CommandWord.QUIT);
+        validCommands.put("jump",CommandWord.JUMP);
+        
     }
 
     /**
@@ -31,22 +39,15 @@ public class CommandWords
      */
     public boolean isCommand(String aString)
     {
-        for(int i = 0; i < validCommands.length; i++) {
-            if(validCommands[i].equals(aString))
-                return true;
-        }
-        // if we get here, the string was not found in the commands
-        return false;
+        return validCommands.containsKey(aString);
     }
-    public String getCommandWords() {
-        return Arrays.toString(validCommands);
+    public CommandWord getCommand(String word){
+        return validCommands.get(word);
     }
-
     @Override
     public String toString() {
         String ret = "";
-        for (String command : validCommands
-        ) {
+        for (String command : validCommands.keySet()) {
             ret+= command + " ";
         }
         return ret;

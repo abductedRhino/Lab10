@@ -1,3 +1,19 @@
+/**
+ *  This class is the main class of the "World of Zuul" application. 
+ *  "World of Zuul" is a very simple, text based adventure game.  Users 
+ *  can walk around some scenery. That's all. It should really be extended 
+ *  to make it more interesting!
+ * 
+ *  To play this game, create an instance of this class and call the "play"
+ *  method.
+ * 
+ *  This main class creates and initialises all the others: it creates all
+ *  rooms, creates the parser and starts the game.  It also evaluates and
+ *  executes the commands that the parser returns.
+ * 
+ * @author  Michael Kölling and David J. Barnes
+ * @version 2016.02.29
+ */
 /*
  * nextRoom = currentRoom.eastExit -> nextRoom = currentRoom.getExit("east") s.295
  * 
@@ -7,23 +23,7 @@
  * methoden printWelcome und goRoom sollen darauf zugreifen
  */
 
-/**
- * This class is the main class of the "World of Zuul" application.
- * "World of Zuul" is a very simple, text based adventure game.  Users
- * can walk around some scenery. That's all. It should really be extended
- * to make it more interesting!
- * <p>
- * To play this game, create an instance of this class and call the "play"
- * method.
- * <p>
- * This main class creates and initialises all the others: it creates all
- * rooms, creates the parser and starts the game.  It also evaluates and
- * executes the commands that the parser returns.
- *
- * @author Michael Kölling and David J. Barnes
- * @version 2016.02.29
- */
-public class Game
+public class Game 
 {
     private Parser parser;
     private Room currentRoom;
@@ -31,7 +31,7 @@ public class Game
     /**
      * Create the game and initialise its internal map.
      */
-    public Game()
+    public Game() 
     {
         createRooms();
         parser = new Parser();
@@ -65,9 +65,9 @@ public class Game
     }
 
     /**
-     * Main play routine.  Loops until end of play.
+     *  Main play routine.  Loops until end of play.
      */
-    public void play()
+    public void play() 
     {            
         printWelcome();
 
@@ -123,7 +123,29 @@ public class Game
             return "I don't know what you mean...";       
         }
         String result = null;
-        String commandWord = command.getCommandWord();
+        CommandWord commandWord = parser.getEnum(command.getCommandWord());
+        switch(commandWord) {
+        case HELP :
+            result = printHelp();
+            break;
+        case GO :
+            result = goRoom(command);
+            break;
+        case EAT :
+            result = eat();
+            break;
+        case LOOK:
+            result = look();
+            break;
+        case QUIT:
+            result = quit(command);
+            break;
+        case JUMP:
+            result = jump();
+            break;    
+        }
+        
+        /*
         if (commandWord.equals("help")) {
             result = printHelp();
         }
@@ -139,10 +161,10 @@ public class Game
         else if (commandWord.equals("eat")){
             result = eat();
         }
-        else if (commandWord.equals("jump")){
+        else if (commandWord == CommandWord.JUMP){
             result = jump();
         }
-
+        */
         return result ;
     }
 
