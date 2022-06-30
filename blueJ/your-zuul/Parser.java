@@ -26,7 +26,7 @@ public class Parser
      */
     public Parser() 
     {
-        commands = new CommandWords(new String[]{"go", "quit", "help", "look", "eat", "jump"});
+        commands = new CommandWords();
         reader = new Scanner(System.in);
     }
 
@@ -37,12 +37,13 @@ public class Parser
         String inputLine = readLine();
         return getCommand(inputLine);
     }
-
     private String readLine(){    
         System.out.print("> ");     // print prompt
         return reader.nextLine();
     }
-
+    public CommandWord getEnum(String firstWord){
+        return commands.getCommand(firstWord);
+    }
     public Command getCommand(String inputLine)
     {
         String word1 = null;

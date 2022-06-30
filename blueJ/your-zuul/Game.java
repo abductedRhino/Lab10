@@ -123,7 +123,29 @@ public class Game
             return "I don't know what you mean...";       
         }
         String result = null;
-        String commandWord = command.getCommandWord();
+        CommandWord commandWord = parser.getEnum(command.getCommandWord());
+        switch(commandWord) {
+        case HELP :
+            result = printHelp();
+            break;
+        case GO :
+            result = goRoom(command);
+            break;
+        case EAT :
+            result = eat();
+            break;
+        case LOOK:
+            result = look();
+            break;
+        case QUIT:
+            result = quit(command);
+            break;
+        case JUMP:
+            result = jump();
+            break;    
+        }
+        
+        /*
         if (commandWord.equals("help")) {
             result = printHelp();
         }
@@ -139,10 +161,10 @@ public class Game
         else if (commandWord.equals("eat")){
             result = eat();
         }
-        else if (commandWord.equals("jump")){
+        else if (commandWord == CommandWord.JUMP){
             result = jump();
         }
-
+        */
         return result ;
     }
 
