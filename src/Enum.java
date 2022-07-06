@@ -11,7 +11,8 @@ public enum Enum {
     EAT("eat"),
     LOOK("look"),
     JUMP("jump"),
-    UNKNOWN("?");
+    UNKNOWN("?"),
+    BACK("back");
     private String keyWord;
     Enum(String keyWord) {
         this.keyWord = keyWord;
