@@ -5,7 +5,7 @@
  * @author (your name here)
  * @version (version number or date here)
  */
-public enum CommandWord
+public enum Enum
 {
     GO,QUIT,HELP,EAT,LOOK,UNKNOWN,JUMP;
 }

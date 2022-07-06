@@ -18,7 +18,7 @@ import java.util.Scanner;
  */
 public class Parser 
 {
-    private CommandWords commands;  // holds all valid command words
+    private Commands commands;  // holds all valid command words
     private Scanner reader;         // source of command input
 
     /**
@@ -26,14 +26,14 @@ public class Parser
      */
     public Parser() 
     {
-        commands = new CommandWords();
+        commands = new Commands();
         reader = new Scanner(System.in);
     }
 
     /**
      * @return The next command from the user.
      */
-    public Command getCommand() {
+    public PlayerCom getCommand() {
         String inputLine = readLine();
         return getCommand(inputLine);
     }
@@ -41,10 +41,12 @@ public class Parser
         System.out.print("> ");     // print prompt
         return reader.nextLine();
     }
-    public CommandWord getEnum(String firstWord){
+    
+    public Enum getEnum(String firstWord){
         return commands.getCommand(firstWord);
     }
-    public Command getCommand(String inputLine)
+    
+    public PlayerCom getCommand(String inputLine)
     {
         String word1 = null;
         String word2 = null;
@@ -62,10 +64,10 @@ public class Parser
         // Now check whether this word is known. If so, create a command
         // with it. If not, create a "null" command (for unknown command).
         if(commands.isCommand(word1)) {
-            return new Command(word1, word2);
+            return new PlayerCom(word1, word2);
         }
         else {
-            return new Command(null, word2); 
+            return new PlayerCom(null, word2); 
         }
     }
     public String showCommands() {

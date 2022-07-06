@@ -43,13 +43,6 @@ public class Room
     public Room getExit(String direction) {
         return exits.get(direction);
     }
-    /**
-     * @return The description of the room.
-     */
-    public String getDescription()
-    {
-        return description;
-    }
     public String getAllExits() {
         String ret = "";
         for (String room : exits.keySet()) {

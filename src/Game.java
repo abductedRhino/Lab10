@@ -88,18 +88,6 @@ public class Game
     }
 
     /**
-     * This is a further method added by BK to
-     * provide a clearer interface that can be tested:
-     * Game processes a commandLine and returns output.
-     * @param commandLine - the line entered as String
-     * @return output of the command
-     */
-    public String processCommand(String commandLine){
-        Command command = parser.getCommand(commandLine);
-        return processCommand(command);
-    }
-
-    /**
      * Print out the opening message for the player.
      */
     private void printWelcome()
@@ -118,13 +106,12 @@ public class Game
      * @return true If the command ends the game, false otherwise.
      */
     private String processCommand(Command command) {
-        boolean wantToQuit = false;
         if(command.isUnknown()) {
             return "I don't know what you mean...";       
         }
         String result = null;
-        CommandWord commandWord = parser.getEnum(command.getCommandWord());
-        switch(commandWord) {
+        Enum keyWord = parser.getEnum(command.getFirstWord());
+        switch(keyWord) {
         case HELP :
             result = printHelp();
             break;
@@ -144,27 +131,6 @@ public class Game
             result = jump();
             break;    
         }
-        
-        /*
-        if (commandWord.equals("help")) {
-            result = printHelp();
-        }
-        else if (commandWord.equals("go")) {
-            result = goRoom(command);
-        }
-        else if (commandWord.equals("quit")) {
-            result = quit(command);
-        }
-        else if (commandWord.equals("look")){
-            result = look();
-        }
-        else if (commandWord.equals("eat")){
-            result = eat();
-        }
-        else if (commandWord == CommandWord.JUMP){
-            result = jump();
-        }
-        */
         return result ;
     }
 

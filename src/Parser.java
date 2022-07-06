@@ -35,16 +35,16 @@ public class Parser
      */
     public Command getCommand() {
         String inputLine = readLine();
-        return getCommand(inputLine);
+        return inputToCommand(inputLine);
     }
     private String readLine(){    
         System.out.print("> ");     // print prompt
         return reader.nextLine();
     }
-    public CommandWord getEnum(String firstWord){
-        return commands.getCommand(firstWord);
+    public Enum getEnum(String firstWord){
+        return commands.getEnum(firstWord);
     }
-    public Command getCommand(String inputLine)
+    private Command inputToCommand(String inputLine)
     {
         String word1 = null;
         String word2 = null;

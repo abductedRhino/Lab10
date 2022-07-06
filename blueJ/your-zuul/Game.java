@@ -76,7 +76,7 @@ public class Game
 
         boolean finished = false;
         while (! finished) {
-            Command command = parser.getCommand();
+            PlayerCom command = parser.getCommand();
             String output = processCommand(command);
             finished = (null == output);
             if (!finished)
@@ -95,7 +95,7 @@ public class Game
      * @return output of the command
      */
     public String processCommand(String commandLine){
-        Command command = parser.getCommand(commandLine);
+        PlayerCom command = parser.getCommand(commandLine);
         return processCommand(command);
     }
 
@@ -117,14 +117,14 @@ public class Game
      * @param command The command to be processed.
      * @return true If the command ends the game, false otherwise.
      */
-    private String processCommand(Command command) {
+    private String processCommand(PlayerCom command) {
         boolean wantToQuit = false;
         if(command.isUnknown()) {
             return "I don't know what you mean...";       
         }
         String result = null;
-        CommandWord commandWord = parser.getEnum(command.getCommandWord());
-        switch(commandWord) {
+        Enum keyWord = parser.getEnum(command.getCommandWord());
+        switch(keyWord) {
         case HELP :
             result = printHelp();
             break;
@@ -193,7 +193,7 @@ public class Game
      * Try to go in one direction. If there is an exit, enter
      * the new room, otherwise print an error message.
      */
-    private String goRoom(Command command) 
+    private String goRoom(PlayerCom command) 
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
@@ -220,7 +220,7 @@ public class Game
      * whether we really quit the game.
      * @return true, if this command quits the game, false otherwise.
      */
-    private String quit(Command command) 
+    private String quit(PlayerCom command) 
     {
         if(command.hasSecondWord()) {
             return "Quit what?";

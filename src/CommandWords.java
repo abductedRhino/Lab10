@@ -15,21 +15,18 @@ import java.util.HashMap;
 public class CommandWords
 {
     // a constant array that holds all valid command words
-    private HashMap<String, CommandWord> validCommands;
+    private HashMap<String, Enum> validCommands;
 
     /**
      * Constructor - initialise the command words.
      */
     public CommandWords() {
         validCommands = new HashMap<>();
-        validCommands.put("go",CommandWord.GO);
-        validCommands.put("look",CommandWord.LOOK);
-        validCommands.put("eat",CommandWord.EAT);
-        validCommands.put("help",CommandWord.HELP);
-        //validCommands.put("?",CommandWord.UNKNOWN);
-        validCommands.put("quit",CommandWord.QUIT);
-        validCommands.put("jump",CommandWord.JUMP);
-        
+        for (Enum ENUM : Enum.values()) {
+            if (ENUM != Enum.UNKNOWN) {
+                validCommands.put(ENUM.toString(), ENUM);
+            }
+        }
     }
 
     /**
@@ -37,18 +34,18 @@ public class CommandWords
      * @return true if a given string is a valid command,
      * false if it isn't.
      */
-    public boolean isCommand(String aString)
+    public boolean isCommand(String keyWord)
     {
-        return validCommands.containsKey(aString);
+        return validCommands.containsKey(keyWord);
     }
-    public CommandWord getCommand(String word){
-        return validCommands.get(word);
+    public Enum getEnum(String keyWord){
+        return validCommands.get(keyWord);
     }
     @Override
     public String toString() {
         String ret = "";
-        for (String command : validCommands.keySet()) {
-            ret+= command + " ";
+        for (String keyWord : validCommands.keySet()) {
+            ret+= keyWord + " ";
         }
         return ret;
     }
