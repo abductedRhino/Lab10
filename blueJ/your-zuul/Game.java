@@ -76,7 +76,7 @@ public class Game
 
         boolean finished = false;
         while (! finished) {
-            PlayerCom command = parser.getCommand();
+            Command command = parser.getCommand();
             String output = processCommand(command);
             finished = (null == output);
             if (!finished)
@@ -85,18 +85,6 @@ public class Game
             }
         }
         System.out.println("Thank you for playing.  Good bye.");
-    }
-
-    /**
-     * This is a further method added by BK to
-     * provide a clearer interface that can be tested:
-     * Game processes a commandLine and returns output.
-     * @param commandLine - the line entered as String
-     * @return output of the command
-     */
-    public String processCommand(String commandLine){
-        PlayerCom command = parser.getCommand(commandLine);
-        return processCommand(command);
     }
 
     /**
@@ -117,13 +105,12 @@ public class Game
      * @param command The command to be processed.
      * @return true If the command ends the game, false otherwise.
      */
-    private String processCommand(PlayerCom command) {
-        boolean wantToQuit = false;
+    private String processCommand(Command command) {
         if(command.isUnknown()) {
             return "I don't know what you mean...";       
         }
         String result = null;
-        Enum keyWord = parser.getEnum(command.getCommandWord());
+        Enum keyWord = parser.getEnum(command.getFirstWord());
         switch(keyWord) {
         case HELP :
             result = printHelp();
@@ -144,27 +131,6 @@ public class Game
             result = jump();
             break;    
         }
-        
-        /*
-        if (commandWord.equals("help")) {
-            result = printHelp();
-        }
-        else if (commandWord.equals("go")) {
-            result = goRoom(command);
-        }
-        else if (commandWord.equals("quit")) {
-            result = quit(command);
-        }
-        else if (commandWord.equals("look")){
-            result = look();
-        }
-        else if (commandWord.equals("eat")){
-            result = eat();
-        }
-        else if (commandWord == CommandWord.JUMP){
-            result = jump();
-        }
-        */
         return result ;
     }
 
@@ -193,7 +159,7 @@ public class Game
      * Try to go in one direction. If there is an exit, enter
      * the new room, otherwise print an error message.
      */
-    private String goRoom(PlayerCom command) 
+    private String goRoom(Command command) 
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
@@ -220,7 +186,7 @@ public class Game
      * whether we really quit the game.
      * @return true, if this command quits the game, false otherwise.
      */
-    private String quit(PlayerCom command) 
+    private String quit(Command command) 
     {
         if(command.hasSecondWord()) {
             return "Quit what?";
